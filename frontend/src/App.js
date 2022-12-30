@@ -1,6 +1,8 @@
 import './App.css';
 import Navbar from './container/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useSol } from './components/hook/useSol';
+import SignIn from './components/Signin';
 
 const navbarTheme = createTheme({
   status: {
@@ -19,11 +21,17 @@ const navbarTheme = createTheme({
 });
 
 function App() {
+  const { signedIn } = useSol();
   return (
-  
-    <ThemeProvider theme={navbarTheme}>
-      <Navbar />
-    </ThemeProvider>
+    <>
+    { signedIn ?
+        <ThemeProvider theme={navbarTheme}>
+          <Navbar />
+        </ThemeProvider>
+      : <SignIn />
+    }
+    </>
+
     
   );
 }
