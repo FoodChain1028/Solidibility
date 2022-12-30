@@ -1,6 +1,5 @@
 import './App.css';
-import Navbar from './components/Navbar';
-import PersistentDrawerRight from './components/Navbar';
+import Navbar from './container/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const navbarTheme = createTheme({
@@ -21,6 +20,7 @@ const navbarTheme = createTheme({
 
 function App() {
   return (
+  
     <ThemeProvider theme={navbarTheme}>
       <Navbar />
     </ThemeProvider>
