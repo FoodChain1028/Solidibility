@@ -19,12 +19,13 @@ function App() {
           <Router>
             <Navbar />
             <Routes>
-              <Route path="/" />
+              <Route path="/" >
                 <Route index element={<Home />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/quiz" element={<Quiz />} />
-                  <Route path="/about-us" element={<About />} />
-              <Route/>
+                  <Route path="profile" element={<Profile />} />
+                  <Route path="quiz" element={<Quiz />} />
+                  <Route path="about-us" element={<About />} />
+                
+              </Route>
             </Routes>
           </Router>
 

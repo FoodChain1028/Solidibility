@@ -60,18 +60,18 @@ export default function Navbar() {
   };
 
   const handleOnClick = (i) => {
+
     switch(i){
-      case 0: return "/"
-      case 1: return "/profile"
-      case 2: return "/quiz"
-      case 3: return "/about-us"
+      case 0: {navigate("/"); break;}
+      case 1: {navigate("/profile"); break}
+      case 2: {navigate("/quiz"); break}
+      case 3: {navigate("/about-us"); break}
     }
   }
-  const navigateToAbout = () => {
-    navigate("/about-us")
-  }
+
 
   const handleIcon = (i) => {
+    
     switch(i){
       case 0: return <HomeIcon/>
       case 1: return <AccountCircleIcon/>
@@ -109,7 +109,7 @@ export default function Navbar() {
               const icon = handleIcon(i)
               return (
                 <ListItem disablePadding key={i}>
-                  <ListItemButton>
+                  <ListItemButton onClick={() => handleOnClick(i)}>
                     <ListItemIcon>
                       {icon}
                     </ListItemIcon>
@@ -120,7 +120,6 @@ export default function Navbar() {
           })
         }
         </List>
-        <Button onClick={navigateToAbout}>Hi</Button>
       </Drawer>
     </ThemeProvider>
   );

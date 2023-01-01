@@ -126,16 +126,16 @@ const SignIn = () => {
               Connect Your Wallet to Login.
             </Typography>
             
-            <Box component="form" noValidate onSubmit={handleConnect} sx={{ mt: 20 }}>
+            <Box component="form" noValidate onSubmit={handleConnect} sx={{ mt: 5 }}>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 0, mb: 2 }}
               >
                 Connect
               </Button>
-              <Copyright sx={{ mt: 20 }} />
+              <Copyright sx={{ mt: 45 }} />
             </Box>
           </Box>
         </Grid>
