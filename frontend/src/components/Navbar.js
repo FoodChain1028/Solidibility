@@ -1,4 +1,4 @@
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme, createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,10 +16,10 @@ import HomeIcon from '@mui/icons-material/Home';
 import QuizIcon from '@mui/icons-material/Quiz';
 import InfoIcon from '@mui/icons-material/Info';
 
-import NavigationBar from '../components/navigationBar';
+import NavigationBar from '../containers/navigationBar';
 import SolRoutes from './SolRoutes';
 
-import { useSol } from '../components/hook/useSol';
+import { useSol } from '../containers/hook/useSol';
 
 const drawerWidth = 240;
 
@@ -52,6 +52,22 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
+const navbarTheme = createTheme({
+  status: {
+    danger: '#e53e3e',
+  },
+  palette: {
+    primary: {
+      main: '#FFC78E',
+      darker: '#053e85',
+    },
+    neutral: {
+      main: '#64748B',
+      contrastText: '#fff',
+    },
+  },
+});
+
 export default function PersistentDrawerRight() {
 
   const theme = useTheme();
@@ -70,60 +86,58 @@ export default function PersistentDrawerRight() {
       case 2: return "/quiz"
       case 3: return "/about-us"
     }
-      
-
   }
 
   return (
-    
-    <Box sx={{ display: 'flex' }}>
-    <CssBaseline />
-      
-    <NavigationBar />
-    <SolRoutes/>
+    <ThemeProvider theme={navbarTheme}>
+      <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
         
-    <Drawer
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
+      <NavigationBar />
+      <SolRoutes/>
+          
+      <Drawer
+        sx={{
           width: drawerWidth,
-        },
-      }}
-      variant="persistent"
-      anchor="left"
-      open={navOpen}
-    >
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+          },
+        }}
+        variant="persistent"
+        anchor="left"
+        open={navOpen}
+        >
 
-      <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
-          <ChevronRightIcon />
-        </IconButton>
-      </DrawerHeader>
-      <Divider />
-      
-      <List>
-        {
-        ["Home", "Profile", "Quiz", "About us"].map((text, i) => {
-          let icon = <HomeIcon/>
-          if (i === 1) icon = (<AccountCircleIcon/>);
-          else if (i === 2) icon = (<QuizIcon/>);
-          else if (i === 3) icon = (<InfoIcon/>);
-          return (
-            <ListItem disablePadding>
-              <ListItemButton href={handleOnClick(i)}>
-                  <ListItemIcon>
-                    {icon}
-                  </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton >
-            </ListItem>
-          )
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronRightIcon />
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        
+        <List>
+          {
+            ["Home", "Profile", "Quiz", "About us"].map((text, i) => {
+              let icon = <HomeIcon/>
+              if (i === 1) icon = (<AccountCircleIcon/>);
+              else if (i === 2) icon = (<QuizIcon/>);
+              else if (i === 3) icon = (<InfoIcon/>);
+              return (
+                <ListItem disablePadding>
+                <ListItemButton href={handleOnClick(i)}>
+                    <ListItemIcon>
+                      {icon}
+                    </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton >
+              </ListItem>
+            )
           })
         }
-      </List>
-    </Drawer>
-    
-  </Box>
+        </List>
+      </Drawer>
+      </Box>
+    </ThemeProvider>
   );
 }

@@ -39,9 +39,7 @@ const Profile = () => {
       <Typography paragraph>
         Profile Page Working
       </Typography>
-      
     </Main>
-
     </>
     
   )

@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import { styled} from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 const About = () => {
 
@@ -41,10 +41,8 @@ const About = () => {
         <p>We are two students from NTU who suffered from Web Programming and at last published this website. hurray.</p>
       </Typography>
       <Typography paragraph>
-        
       </Typography> 
     </Main>
-
     </>
     
   )
