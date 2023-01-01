@@ -53,7 +53,6 @@ const connectWallet = async () => {
     await window.ethereum.send("eth_requestAccounts");
     const accounts = await web3.eth.getAccounts();
     const account = accounts[0];
-    console.log(account);
     return account;
   } else {
     // Show alert if Ethereum provider is not detected
@@ -87,12 +86,10 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    console.log(account);
     if (account !== "") {
       setSignedIn(true);
-      console.log("Hi");
     }
-  }, [account, setAccount]);
+  }, [account]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -125,7 +122,6 @@ const SignIn = () => {
             <Avatar sx={{ m: 1, bgcolor: 'secondary' }}>
               <LockOutlinedIcon />
             </Avatar>
-
             <Typography component="h1" variant="h5" sx={{mt: 3}}>
               Connect Your Wallet to Login.
             </Typography>

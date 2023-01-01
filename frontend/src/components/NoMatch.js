@@ -1,10 +1,7 @@
 import Typography from '@mui/material/Typography';
-import { Link } from '@mui/material';
-import { Box } from '@mui/material';
-import { styled} from '@mui/material/styles';
-import Navbar from './Navbar';
+import { styled } from '@mui/material/styles';
 
-const Home = () => {
+const NoMatch = () => {
 
   const drawerWidth = 240;
   const DrawerHeader = styled('div')(({ theme }) => ({
@@ -25,7 +22,6 @@ const Home = () => {
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: drawerWidth,
-    marginRight: drawerWidth,
     ...(open && {
       transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
@@ -37,22 +33,19 @@ const Home = () => {
   );
 
   return(
+    <>
     <Main>
       <DrawerHeader />
-      <Typography variant='h4'> What is Solidibility ? </Typography>
-      <br/>
-
       <Typography paragraph>
-        Solidibility is a leetcode-like web application. We hope you can learn plenty of knowledge and skills of solidity progarmming from here.
+        <h1>Error 404</h1>
+        <p>Cannot find anything here, please get back to home.</p>
       </Typography>
-
-      <br/>
-      <Typography variant='h5'> What is Solidity ? </Typography>
-      <br/>
-      <Typography paragraph>  
-        Solidity is a smart-contract langauage which can be compiled and recorded in Ethereum or other related blockchain network. We can use IDE like <Link href="https://remix.ethereum.org/" underline='none'>Remix</Link> to connect with the smart contracts on the blockchain.
+      <Typography paragraph>
       </Typography> 
     </Main>
+    </>
+    
   )
+
 }
-export default Home;
+export default NoMatch;

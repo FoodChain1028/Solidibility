@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import List from '@mui/material/List';
+import { Button } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -16,31 +17,13 @@ import HomeIcon from '@mui/icons-material/Home';
 import QuizIcon from '@mui/icons-material/Quiz';
 import InfoIcon from '@mui/icons-material/Info';
 
+import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../containers/navigationBar';
 import SolRoutes from './SolRoutes';
 
 import { useSol } from '../containers/hook/useSol';
 
 const drawerWidth = 240;
-
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-    marginLeft: drawerWidth,
-    ...(open && {
-      transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: drawerWidth,
-  }),
-  }),
-);
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -68,13 +51,10 @@ const navbarTheme = createTheme({
   },
 });
 
-export default function PersistentDrawerRight() {
-
-  const theme = useTheme();
+export default function Navbar() {
   const { navOpen, setNavOpen } = useSol();
-
-
-  
+  const navigate = useNavigate();
+ 
   const handleDrawerClose = () => {
     setNavOpen(false);
   };
@@ -87,15 +67,22 @@ export default function PersistentDrawerRight() {
       case 3: return "/about-us"
     }
   }
+  const navigateToAbout = () => {
+    navigate("/about-us")
+  }
+
+  const handleIcon = (i) => {
+    switch(i){
+      case 0: return <HomeIcon/>
+      case 1: return <AccountCircleIcon/>
+      case 2: return <QuizIcon/>
+      case 3: return <InfoIcon/>
+    }
+  }
 
   return (
     <ThemeProvider theme={navbarTheme}>
-      <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-        
       <NavigationBar />
-      <SolRoutes/>
-          
       <Drawer
         sx={{
           width: drawerWidth,
@@ -119,25 +106,22 @@ export default function PersistentDrawerRight() {
         <List>
           {
             ["Home", "Profile", "Quiz", "About us"].map((text, i) => {
-              let icon = <HomeIcon/>
-              if (i === 1) icon = (<AccountCircleIcon/>);
-              else if (i === 2) icon = (<QuizIcon/>);
-              else if (i === 3) icon = (<InfoIcon/>);
+              const icon = handleIcon(i)
               return (
-                <ListItem disablePadding>
-                <ListItemButton href={handleOnClick(i)}>
+                <ListItem disablePadding key={i}>
+                  <ListItemButton>
                     <ListItemIcon>
                       {icon}
                     </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton >
+                    <ListItemText primary={text} />
+                  </ListItemButton >
               </ListItem>
             )
           })
         }
         </List>
+        <Button onClick={navigateToAbout}>Hi</Button>
       </Drawer>
-      </Box>
     </ThemeProvider>
   );
 }

@@ -1,8 +1,8 @@
 import Typography from '@mui/material/Typography';
 import { styled} from '@mui/material/styles';
-
+import { useSol } from '../containers/hook/useSol';
 const Profile = () => {
-
+  const { account } = useSol();
   const drawerWidth = 240;
   const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -37,7 +37,7 @@ const Profile = () => {
     <Main>
       <DrawerHeader />
       <Typography paragraph>
-        Profile Page Working
+        {"Address: " + account}
       </Typography>
     </Main>
     </>

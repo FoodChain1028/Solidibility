@@ -12,10 +12,10 @@ const SolRoutes = () => {
 
     <Router>
       <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/about-us" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/about-us" element={<About />} />
+        <Route exact path="/" element={<Home />} />
       </Routes>
     </Router> 
     
