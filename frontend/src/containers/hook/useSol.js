@@ -6,7 +6,11 @@ const SolContext = createContext({
   signedIn: false,
   setSignedIn: () => {},
   account: "",
-  setAccount: () => {}
+  setAccount: () => {},
+  problemSet: [],
+  code:"",
+  setCode: () => {},
+
 });
 
 const SolProvider = (props) => {
@@ -15,6 +19,23 @@ const SolProvider = (props) => {
   const [navOpen, setNavOpen] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [account, setAccount] = useState("");
+  const [code, setCode] = useState("")
+
+  const problemSet = [
+    {
+      id:1,
+      description:"problem 1"
+    },
+    {
+      id:2,
+      description:"problem 2"
+    },
+    {
+      id:3,
+      description:"problem3"
+    }
+  ]
+
 
   return (
 	  <SolContext.Provider
@@ -25,7 +46,12 @@ const SolProvider = (props) => {
         signedIn,
         setSignedIn,
         account,
-        setAccount
+        setAccount,
+        problemSet,
+        code,
+        setCode,
+        
+
 			}
 		}
 		{...props}

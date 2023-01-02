@@ -2,7 +2,6 @@ import Typography from '@mui/material/Typography';
 import { Avatar } from '@mui/material';
 import { Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { orange } from '@mui/material/colors';
 
 const About = () => {
 

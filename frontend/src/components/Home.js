@@ -1,8 +1,6 @@
 import Typography from '@mui/material/Typography';
 import { Link } from '@mui/material';
-import { Box } from '@mui/material';
-import { styled} from '@mui/material/styles';
-import Navbar from './Navbar';
+import { styled } from '@mui/material/styles';
 
 const Home = () => {
 

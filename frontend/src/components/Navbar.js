@@ -1,9 +1,6 @@
-import { styled, useTheme, createTheme, ThemeProvider } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
 import List from '@mui/material/List';
-import { Button } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -60,7 +57,6 @@ export default function Navbar() {
   };
 
   const handleOnClick = (i) => {
-
     switch(i){
       case 0: {navigate("/"); break;}
       case 1: {navigate("/profile"); break}
