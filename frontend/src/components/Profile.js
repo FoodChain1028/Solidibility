@@ -9,7 +9,7 @@ import Fade from 'react-reveal/Fade';
 
 const Profile = () => {
   const { account } = useSol();
-  const drawerWidth = 240;
+  const drawerWidth = 450;
   const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -28,6 +28,7 @@ const Profile = () => {
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: drawerWidth,
+    marginRight: drawerWidth,
     ...(open && {
       transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,

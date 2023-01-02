@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 
 const About = () => {
 
-  const drawerWidth = 240;
+  const drawerWidth = 500;
   const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -24,7 +24,7 @@ const About = () => {
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: drawerWidth,
-    marginRight: drawerWidth,
+    marginRight: drawerWidth-100,
     ...(open && {
       transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
