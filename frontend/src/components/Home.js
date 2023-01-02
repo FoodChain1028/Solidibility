@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 
 const Home = () => {
 
-  const drawerWidth = 450;
+  const drawerWidth = 240;
   const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -45,7 +45,7 @@ const Home = () => {
       </Typography>
 
       <br/>
-      <Typography variant='h4'> What is Solidity ? </Typography>
+      <Typography variant='h5'> What is Solidity ? </Typography>
       <br/>
       <Typography paragraph>  
         Solidity is a smart-contract langauage which can be compiled and recorded in Ethereum or other related blockchain network. We can use IDE like <Link href="https://remix.ethereum.org/" underline='none'>Remix</Link> to connect with the smart contracts on the blockchain.

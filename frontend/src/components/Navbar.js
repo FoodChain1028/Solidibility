@@ -16,9 +16,11 @@ import InfoIcon from '@mui/icons-material/Info';
 
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../containers/navigationBar';
+import SolRoutes from './SolRoutes';
+
 import { useSol } from '../containers/hook/useSol';
 
-const drawerWidth = 300;
+const drawerWidth = 240;
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',

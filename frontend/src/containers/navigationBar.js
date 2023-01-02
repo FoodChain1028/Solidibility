@@ -6,12 +6,11 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
 import { useSol } from './hook/useSol';
-import { useNavigate } from 'react-router-dom';
 
 const NavigationBar = () => {
 
   const { navOpen, setNavOpen } = useSol();
-  const navigate = useNavigate();
+
   const drawerWidth = 240;
 
   const handleDrawerOpen = () => {
@@ -35,8 +34,6 @@ const NavigationBar = () => {
       }),
     }));
 
-
-
   return(
     <AppBar position="fixed" open={navOpen} color='primary'>
       <Toolbar>
@@ -53,17 +50,11 @@ const NavigationBar = () => {
         <Typography 
           variant="h4" 
           align='center' 
-          noWrap sx={{ flexGrow: 1}} 
+          noWrap sx={{ flexGrow: 1 }} 
           component="div"
           fontFamily="serif"
         > 
-          <IconButton
-          color="inherit"
-          onClick={() => {navigate("/")}}
-          sx={{ mb: 1 }}
-          >
-            <PetsRoundedIcon/>
-          </IconButton>
+          <PetsRoundedIcon/> <> </>
             Solidibility
         </Typography>
 
