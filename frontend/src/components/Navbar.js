@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import List from '@mui/material/List';
-import { Button } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -19,11 +18,9 @@ import InfoIcon from '@mui/icons-material/Info';
 
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../containers/navigationBar';
-import SolRoutes from './SolRoutes';
-
 import { useSol } from '../containers/hook/useSol';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
