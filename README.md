@@ -18,6 +18,7 @@ Solidibility is a leetcode-like system, which has several problem ready to be so
 <!-- 以上為須發布在fb的內容 -->
 
 ### 如何在 localhost 安裝與測試之詳細步驟
+!!metamask
 * `cd frontend`
 * `yarn`
 

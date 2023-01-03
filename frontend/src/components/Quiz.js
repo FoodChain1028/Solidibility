@@ -57,6 +57,7 @@ const Quiz = () => {
 
   return(
     <Main>
+    <Typography variant='h4'> What is Solidibility ? </Typography>
     <Box sx={{
       height: '100vh',
       width: { xs: "100%", sm: '55%' },
