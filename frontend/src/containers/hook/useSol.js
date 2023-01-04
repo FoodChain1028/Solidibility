@@ -24,16 +24,18 @@ const SolProvider = (props) => {
   const problemSet = [
     {
       id:1,
-      description:"problem 1"
-      
+      description:"problem 1",
+      isCorrect: true  
     },
     {
       id:2,
-      description:"problem 2"
+      description:"problem 2",
+      isCorrect: true
     },
     {
       id:3,
-      description:"problem3"
+      description:"problem3",
+      isCorrect: false
     }
   ]
 

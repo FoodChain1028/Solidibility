@@ -1,76 +1,130 @@
-import { Box, Typography, styled } from '@mui/material'
+import { Box, Typography, styled, Button } from '@mui/material'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp';
+import CancelSharpIcon from '@mui/icons-material/CancelSharp';
+import Tooltip from '@mui/material/Tooltip';
 import React from 'react'
 import { useSol } from '../containers/hook/useSol';
 import { useNavigate } from 'react-router-dom';
 import DrawerHeader from './DrawerHeader';
 import Main from './Main';
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
+const createData = (name, calories, fat, carbs, protein) => {
+  return { name, calories, fat, carbs, protein };
+}
+
+
+
 const Quiz = () => {
   const { navOpen, problemSet } = useSol();
-
-  const MyBox = styled(Box)(({ theme }) => ({
-    width: '100%',
-    cursor:'pointer',
-    height: '14%',
-    backgroundColor: theme.palette.primary.dark,
-    fontSize: '60px',
-    display: 'flex',
-    // flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#eee',
-    transition: '0.4s all',
-    boxShadow: '0px 0px 5px rgba(0,0,0,0.3)',
-    '&:hover': {
-      backgroundColor: '#eee',
-      color: "grey",
-      transform: 'translateY(-8px)'
-    }
-  }))
-
   const navigate = useNavigate();
   const ToProblem = (id) => {
     console.log("to Problem");
     navigate('/quiz/'+ id)
   }
 
-  return(
-    <Main open={navOpen}>
-    <DrawerHeader/>
-    <Typography variant='h4'> Quiz </Typography>
-    <Box sx={{
-      height: '100vh',
-      width: { xs: "100%", sm: '100%' },
-      bgcolor: 'white',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'top',
+  const ToHistory = (id) => {
+    navigate('/quiz/' + id + "/history")
+  }
 
-    }}
-    >
-      <Box gap={7}
-        sx={{
-          height: '80%',
-          width: "80%",
+  let width = 300;
+  if (navOpen) width = 450;
+  return(
+    <>
+      <Main open={navOpen} style={{
+        marginLeft: width
+      }}>
+        <DrawerHeader/>
+        <Typography variant='h4'> Quiz List</Typography>
+        <p></p>
+        <Typography variant='paragraph'> You can browse and choose the quiz you want to challenge here.</Typography>
+        <p></p>
+        <Typography variant='paragraph'> ✔️  Press the quiz id (left) to enter quizing page. </Typography>
+        <br />
+        <Typography variant='paragraph'> ✔️  Press the status (right) to enter quizing page. </Typography>
+      <Box sx={{
+        height: '100vh',
+        width: { xs: "100%", sm: '100%' },
+        bgcolor: 'white',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'top',
+        marginTop: '10vh'
+      }}
+      >
+        <TableContainer component={Paper} sx={{
+          height: '50vh',
+          width: {xs: '100%', sm: '100%'},
+          bgcolor: 'white',
           display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-evenly',
-          alignContent: 'space-evenly',
-          marginLeft: '10%'
-        }}
-        >
-        {
-          problemSet.map((problem) => {
-            return(
-              <MyBox key={problem.id} onClick={() => ToProblem(problem.id)}>  
-                <Typography variant='h5'>{`Q${problem.id}`}</Typography>
-              </MyBox>
-            )
-          })
-        }
+          justifyContent: 'center',
+          alignItems: 'top',
+        }}>
+          <Table sx={{ minWidth: `100%` }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Quiz Id</StyledTableCell>
+                <StyledTableCell align="center">Quiz Name</StyledTableCell>
+                <StyledTableCell align="right"> </StyledTableCell>
+                <StyledTableCell align="right"> </StyledTableCell>
+                <StyledTableCell align="center">Status</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {problemSet.map((problem, i) => (
+                <StyledTableRow key={problem.id}>
+                  <StyledTableCell component="th" scope="row">
+                    <Tooltip title={"Enter Quiz " + problem.id}>
+                      <Button onClick={() => ToProblem(problem.id)}>{problem.id}</Button>
+                    </Tooltip>
+                  </StyledTableCell>
+                  <StyledTableCell align="right"></StyledTableCell>
+                  <StyledTableCell align="right"></StyledTableCell>
+                  <StyledTableCell align="right"></StyledTableCell>
+                  <StyledTableCell align="center">
+                  <Tooltip title={"View Quiz " + problem.id + " Answer History"} >
+                    <Button color={ problem.isCorrect ? 'success' : 'warning'} onClick={() => ToHistory(problem.id)}>
+                      { 
+                      problem.isCorrect ? 
+                      <CheckCircleSharpIcon color='success' fontSize='large'/>: 
+                      <CancelSharpIcon color='warning' fontSize='large'/>}
+                    </Button>
+                  </Tooltip>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
         </Box>
-      </Box>
-    </Main>
+      </Main>
+    </>
   )
 
 }

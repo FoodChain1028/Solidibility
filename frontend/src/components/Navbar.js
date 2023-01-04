@@ -34,7 +34,7 @@ const navbarTheme = createTheme({
     },
   },
 });
-const drawerWidth = 240;
+const drawerWidth = 350;
 export default function Navbar() {
   const { navOpen, setNavOpen } = useSol();
   const navigate = useNavigate();

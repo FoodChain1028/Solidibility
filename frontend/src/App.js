@@ -9,6 +9,7 @@ import Quiz from './components/Quiz';
 import About from './components/About';
 import Profile from './components/Profile';
 import ProblemPage from './components/ProblemPage';
+import History from './components/History';
 
 function App() {
   const { signedIn } = useSol();
@@ -25,6 +26,7 @@ function App() {
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/quiz" element={<Quiz />} />
                   <Route path="/quiz/:id" element={<ProblemPage />} />
+                  <Route path="quiz/:id/history" element={<History />}/>
                   <Route path="/about-us" element={<About />} />
               </Route>
             </Routes>
