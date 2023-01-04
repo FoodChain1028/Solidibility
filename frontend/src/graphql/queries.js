@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const GET_USERS_QUERY = gql
+export const GET_USER_QUERY = gql
 `
 query user(
   $address: String!
