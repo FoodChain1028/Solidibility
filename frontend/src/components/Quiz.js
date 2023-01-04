@@ -7,6 +7,14 @@ const Quiz = () => {
 
   const { problemSet } = useSol();
   const drawerWidth = 240;
+  const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-start',
+  }));
 
   const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -57,14 +65,15 @@ const Quiz = () => {
 
   return(
     <Main>
-    <Typography variant='h4'> What is Solidibility ? </Typography>
+    <DrawerHeader/>
+    <Typography variant='h4'> Quiz </Typography>
     <Box sx={{
       height: '100vh',
       width: { xs: "100%", sm: '55%' },
       bgcolor: 'white',
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',
+      alignItems: 'top',
 
     }}
     >

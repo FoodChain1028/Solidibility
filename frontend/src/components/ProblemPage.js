@@ -10,7 +10,6 @@ const ProblemPage = () => {
   const { id } = useParams()
   const { problemSet, setCode, code } = useSol();
   
-
   const drawerWidth = 240;
   const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -20,6 +19,7 @@ const ProblemPage = () => {
     ...theme.mixins.toolbar,
     justifyContent: 'flex-start',
   }));
+
   const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
     flexGrow: 1,
@@ -39,13 +39,14 @@ const ProblemPage = () => {
     }),
     }),
   );
-  
+  const handleOnChange = (e) => {
+    // setCode(e)
+  }
   const handleSubmit = () => {
-    console.log("code:", code);
+    console.log(code);
   }
-  const handleOnChange = (value) => {
-    setCode(value)
-  }
+
+
   return(
     <Main>
       <DrawerHeader/>
@@ -54,19 +55,22 @@ const ProblemPage = () => {
       <Typography paragraph>
         {problemSet[id-1].description}
       </Typography>
+      
       <div className="overlay rounded-md overflow-hidden w-full h-full shadow-4xl">
+
         <Editor
           height="50vh"
           width={`150%`}
           language={"javascript"}
           value={code}
-          theme={"black"}
           defaultValue="///SPDX-License-Identifier:MIT"
-          onChange={() => handleOnChange}
+          onChange={(e) => setCode(e)}
         />
+
         <Button variant="outlined" color="error" onClick={() => handleSubmit()}>
           SUBMIT
         </Button>
+
       </div>
     </Main>
     
