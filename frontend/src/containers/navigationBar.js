@@ -11,7 +11,7 @@ const NavigationBar = () => {
 
   const { navOpen, setNavOpen } = useSol();
 
-  const drawerWidth = 240;
+  const drawerWidth = 350;
 
   const handleDrawerOpen = () => {
     setNavOpen(true);
