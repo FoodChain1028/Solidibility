@@ -48,6 +48,7 @@ type Mutation {
     example2: String!, 
     code: String!, 
     others: String!
+    answer: String!
   ): QuestionData!
 
   updateAnswerRecord(
@@ -69,4 +70,5 @@ type Query {
   question(address: String!, questionId: Int!): Question
   questionData: [QuestionData]
   allQuestionOfUser(address: String!): [Question]
+  allQuestionData:[QuestionData]
 }

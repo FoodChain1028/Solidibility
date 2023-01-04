@@ -22,7 +22,13 @@ const Query = {
   allQuestionOfUser: async (parent, { address }, {QuestionModel}) => {
     const allQuestion = await QuestionModel.find({address}).sort();
     return allQuestion;
-  }
+  },
+  
+  allQuestionData: async (parent, params, { QuestionDataModel }) => {
+    let questionData = await QuestionDataModel.find();
+    return questionData
+  },
+
 
 }
 export default Query;

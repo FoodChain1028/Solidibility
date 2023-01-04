@@ -18,8 +18,8 @@ const Mutation = {
     return newQuestion
   },
 
-  createQuestionData: async (parent, { questionId, name, description, example1, example2, code, others }, { QuestionDataModel, pubSub }) => {
-    const newQuestionData = new QuestionDataModel({ questionId, name, description, example1, example2, code, others });
+  createQuestionData: async (parent, { questionId, name, description, example1, example2, code, others, answer }, { QuestionDataModel, pubSub }) => {
+    const newQuestionData = new QuestionDataModel({ questionId, name, description, example1, example2, code, others, answer });
     await newQuestionData.save();
     pubSub.publish("QUESTION_DATA_CREATED", {
       questionDataCreated: newQuestionData,
