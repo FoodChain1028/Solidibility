@@ -2,49 +2,20 @@ import { Box, Typography, styled } from '@mui/material'
 import React from 'react'
 import { useSol } from '../containers/hook/useSol';
 import { useNavigate } from 'react-router-dom';
+import DrawerHeader from './DrawerHeader';
+import Main from './Main';
 
 const Quiz = () => {
-
-  const { problemSet } = useSol();
-  const drawerWidth = 240;
-  const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-start',
-  }));
-
-  const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: drawerWidth,
-    ...(open && {
-      transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: drawerWidth,
-    }),
-    }),
-  );
+  const { navOpen, problemSet } = useSol();
 
   const MyBox = styled(Box)(({ theme }) => ({
-    width: '14%',
+    width: '100%',
     cursor:'pointer',
     height: '14%',
-    padding: '8px',
-    gap: '2px',
     backgroundColor: theme.palette.primary.dark,
     fontSize: '60px',
     display: 'flex',
-    flexDirection: 'column',
+    // flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     color: '#eee',
@@ -64,12 +35,12 @@ const Quiz = () => {
   }
 
   return(
-    <Main>
+    <Main open={navOpen}>
     <DrawerHeader/>
     <Typography variant='h4'> Quiz </Typography>
     <Box sx={{
       height: '100vh',
-      width: { xs: "100%", sm: '55%' },
+      width: { xs: "100%", sm: '100%' },
       bgcolor: 'white',
       display: 'flex',
       justifyContent: 'center',

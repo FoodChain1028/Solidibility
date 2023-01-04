@@ -18,6 +18,7 @@ import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useSol } from './hook/useSol';
 
+
 // wallet connection
 const INFURA_ID = process.env.INFURA_ID;
 const providerOptions = {

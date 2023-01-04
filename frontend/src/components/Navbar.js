@@ -1,3 +1,4 @@
+import DrawerHeader from './DrawerHeader';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -16,21 +17,7 @@ import InfoIcon from '@mui/icons-material/Info';
 
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../containers/navigationBar';
-import SolRoutes from './SolRoutes';
-
 import { useSol } from '../containers/hook/useSol';
-
-const drawerWidth = 240;
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-start',
-}));
-
 
 const navbarTheme = createTheme({
   status: {
@@ -47,7 +34,7 @@ const navbarTheme = createTheme({
     },
   },
 });
-
+const drawerWidth = 240;
 export default function Navbar() {
   const { navOpen, setNavOpen } = useSol();
   const navigate = useNavigate();
@@ -67,7 +54,6 @@ export default function Navbar() {
 
 
   const handleIcon = (i) => {
-    
     switch(i){
       case 0: return <HomeIcon/>
       case 1: return <AccountCircleIcon/>
