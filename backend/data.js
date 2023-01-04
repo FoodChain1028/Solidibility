@@ -1,3 +1,5 @@
+import { QuestionDataModel } from "./src/models/Model"
+
 const data = [
   {
     questionId: 1,
@@ -29,4 +31,12 @@ const data = [
     answer: "function solution(uint256 input) public view returns(bytes32){\n    //TO_DO\n    return keccak256(abi.encodePacked(x));\n}"
   }
 ]
+
+const dataInit = async() => {
+  await QuestionDataModel.deleteMany({});
+  await QuestionDataModel.insertMany(data);
+  console.log("Database initialized!");
+};
+
+export { dataInit };
 

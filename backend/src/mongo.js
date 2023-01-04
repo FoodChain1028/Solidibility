@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 import dotenv from 'dotenv-defaults';
+import { dataInit } from "../data";
 
 export default {
   connect: () => {
+    dataInit();
     dotenv.config();
     if(!process.env.MONGO_URL) {
       console.error("Missing MONGO_URL");
