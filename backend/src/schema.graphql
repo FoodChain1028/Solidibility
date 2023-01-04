@@ -18,6 +18,7 @@ type QuestionData {
   example2: String!
   code: String!
   others: String!
+  answer: String!
 }
 
 type AnswerRecord {
@@ -68,5 +69,4 @@ type Query {
   question(address: String!, questionId: Int!): Question
   questionData: [QuestionData]
   allQuestionOfUser(address: String!): [Question]
-
 }
