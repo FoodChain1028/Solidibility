@@ -5,35 +5,49 @@ import mongoose from "mongoose";
 //  - question_status[]: question[]
 //  - score: Number
 const Schema = mongoose.Schema;
+
 const UserSchema = new Schema({
-    user: {
-      type: String,
-      required: [true, "Address Field is required!"]
-    },
-    name: String, 
-    questionStatus: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Question'
-    }],
-    score: Number
-  });
-  
-const User = mongoose.model('User', UserSchema);
+    address: String, 
+    name: String
+});
   
 //  @QuestionSchema
 //  user: address
-//  questionNum: Number 
-//  status[]: String[]
+//  questionId: Number 
+//  isCorrect: Boolean
 const QuestionSchema = new Schema({
-  user: {
-    type: String,
-    required: [true, "Address Field is required!"]
-  }, 
-  questionNum: Number,
-  isCorrect: Boolean
+  address: String,
+  questionId: Number,
+  isCorrect: Boolean,
+  answerRecord: [{
+    tryId: Number,
+    isCorrect: Boolean,
+    record: String
+  }]
+
 });
 
-const Question = mongoose.model('Question', QuestionSchema);
 
-export default { User, Question }
+//  @QuestionDataSchema
+//  questionId: Number 
+//  description: String
+const QuestionDataSchema = new Schema({
+    questionId: Number,
+    name: String,
+    description: String,
+    example1: String,
+    example2: String,
+    code: String,
+    others: String,
+    answer: String
+});
+
+
+
+const UserModel = mongoose.model('User', UserSchema)
+const QuestionModel = mongoose.model('Question', QuestionSchema);
+const QuestionDataModel = mongoose.model('QuestionData', QuestionDataSchema);
+
+
+export { UserModel, QuestionModel, QuestionDataModel }
 ;
