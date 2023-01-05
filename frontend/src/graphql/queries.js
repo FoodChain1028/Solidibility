@@ -35,8 +35,14 @@ query allQuestionOfUser(
 ){
     address
     questionId
+    isCorrect
+    answerRecord{
+      tryId
+      isCorrect
+      record
     }
   }
+}
 `;
 
 const GET_ALL_QUESTION_DATA_QUERY = gql

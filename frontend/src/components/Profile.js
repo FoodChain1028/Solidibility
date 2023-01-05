@@ -1,3 +1,4 @@
+import React from 'react'
 import Typography from '@mui/material/Typography';
 import { useSol } from '../containers/hook/useSol';
 import { Box, Avatar, IconButton, Tooltip} from '@mui/material'

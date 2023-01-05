@@ -21,6 +21,7 @@ const Query = {
 
   allQuestionOfUser: async (parent, { address }, {QuestionModel}) => {
     const allQuestion = await QuestionModel.find({address}).sort();
+    console.log("called allQuestionUser");
     return allQuestion;
   },
   
