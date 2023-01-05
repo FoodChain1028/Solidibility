@@ -36,7 +36,7 @@ const navbarTheme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Chilanka',
+      'Times New Roman',
       'cursive',
     ].join(','),
     fontSize: [25]
