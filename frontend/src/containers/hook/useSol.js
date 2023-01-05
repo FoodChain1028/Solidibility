@@ -51,7 +51,7 @@ const SolProvider = (props) => {
   const [getQuestion] = useLazyQuery(GET_QUESTION_QUERY);
   const [getQuestionOfUser] = useLazyQuery(GET_ALL_QUESTION_OF_USER_QUERY);
   const [getAllQuestion] = useLazyQuery(GET_ALL_QUESTION_DATA_QUERY);
-
+  
   const problemSet = [
     {
       id:1,

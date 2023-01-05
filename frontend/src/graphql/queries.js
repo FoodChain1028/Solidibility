@@ -42,7 +42,7 @@ query allQuestionOfUser(
 const GET_ALL_QUESTION_DATA_QUERY = gql
 `
 query getAllQuestionData{
-  getAllQuestionData{
+  allQuestionData{
     questionId
     name
     description

@@ -37,9 +37,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
-
-
 const Quiz = () => {
   const { navOpen } = useSol();
   const navigate = useNavigate();
@@ -52,9 +49,10 @@ const Quiz = () => {
     navigate('/quiz/' + id + "/history")
   }
 
-  const { loading, data:data } = useQuery(GET_ALL_QUESTION_DATA_QUERY)
-  
-  if(loading) return <p>loading...</p>
+  // query data when rendering
+  const { loading, data: data } = useQuery(GET_ALL_QUESTION_DATA_QUERY)
+  console.log(data);
+  if (loading) return <p>loading...</p>
   const { problemSet } = data;
 
   let width = 300;
@@ -102,18 +100,18 @@ const Quiz = () => {
             </TableHead>
             <TableBody>
               {problemSet.map((problem, i) => (
-                <StyledTableRow key={problem.id}>
+                <StyledTableRow key={problem.questionId}>
                   <StyledTableCell component="th" scope="row">
-                    <Tooltip title={"Enter Quiz " + problem.id}>
-                      <Button onClick={() => ToProblem(problem.id)}>{problem.id}</Button>
+                    <Tooltip title={"Enter Quiz " + problem.questionId}>
+                      <Button onClick={() => ToProblem(problem.questionId)}>{problem.questionId}</Button>
                     </Tooltip>
                   </StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
                   <StyledTableCell align="center">
-                  <Tooltip title={"View Quiz " + problem.id + " Answer History"} >
-                    <Button color={ problem.isCorrect ? 'success' : 'warning'} onClick={() => ToHistory(problem.id)}>
+                  <Tooltip title={"View Quiz " + problem.questionId + " Answer History"} >
+                    <Button color={ problem.isCorrect ? 'success' : 'warning'} onClick={() => ToHistory(problem.questionId)}>
                       { 
                       problem.isCorrect ? 
                       <CheckCircleSharpIcon color='success' fontSize='large'/>: 
