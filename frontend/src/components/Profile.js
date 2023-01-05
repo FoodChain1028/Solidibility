@@ -3,7 +3,6 @@ import Typography from '@mui/material/Typography';
 import { useSol } from '../containers/hook/useSol';
 import { Box, Avatar, IconButton, Tooltip} from '@mui/material'
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import React from 'react'
 import { EmojiEvents } from '@mui/icons-material'
 import Fade from 'react-reveal/Fade';
 import {styled} from '@mui/material/styles';
@@ -60,7 +59,7 @@ const pic = [
 ]
 
 const Profile = () => {
-  const { account, navOpen, setUserName, getUser } = useSol();
+  const { account, navOpen, setUserName } = useSol();
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState("")
   const [num, setNum] = useState(0)

@@ -1,19 +1,23 @@
 const Mutation = {
   createUser: async (parent, { address }, { UserModel, pubSub }) => {
     console.log("called createUser");
-    const newUser = new UserModel({address});
-    await newUser.save();
+    let user = await UserModel.findOne({ address });
+    if(!user)
+      user = await new UserModel({ address }).save();
     pubSub.publish("USER_CREATED", {
-      userCreated: newUser,
+      userCreated: user,
     });
-    return newUser
+    return user
  },
 
 
   createQuestion: async (parent, { address, questionId }, { QuestionModel, pubSub }) => {
     console.log("called createQuestion");
-    const newQuestion = new QuestionModel({address, questionId, isCorrect: false});
-    await newQuestion.save();
+
+    let newQuestion = await QuestionModel.findOne({ address, questionId }); 
+    if(!newQuestion) 
+      newQuestion = await new QuestionModel({address, questionId, isCorrect: false}).save();
+
     pubSub.publish("QUESTION_CREATED", {
       questionCreated: newQuestion,
     });

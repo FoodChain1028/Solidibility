@@ -18,11 +18,20 @@ query question(
   $address: String!
   $questionId: Int!
 ) {
-  question(address:$address, questionId:$questionId){
+  question(
+    address: $address, 
+    questionId: $questionId
+  ){
     address
     questionId
-    }
+    isCorrect
+    answerRecord{
+      tryId
+      isCorrect
+      record
+    }  
   }
+}
 `;
 
 const GET_ALL_QUESTION_OF_USER_QUERY = gql

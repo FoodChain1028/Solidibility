@@ -44,7 +44,7 @@ const typoStyle = {
 
 
 const Quiz = () => {
-  const { navOpen, getQuestionOfUser } = useSol();
+  const { navOpen, account } = useSol();
   const navigate = useNavigate();
   const ToProblem = (id) => {
     console.log("to Problem");
@@ -54,12 +54,12 @@ const Quiz = () => {
   const ToHistory = (id) => {
     navigate('/quiz/' + id + "/history")
   }
-  const address = "0xaB50035F25F96dd3DEf1A7a9cC4E1C81AD6a7651";
+
   // query data when rendering  
   const res1 = useQuery(GET_ALL_QUESTION_DATA_QUERY)
   const res2 = useQuery(GET_ALL_QUESTION_OF_USER_QUERY, {
     variables: {
-      address
+      address: account
     }
   });
   
@@ -73,7 +73,7 @@ const Quiz = () => {
   if (userLoading) return <p>Loading...</p>;
 
   const _userData = userData.allQuestionOfUser;
-  console.log(_userData);
+  console.log( _userData);
   
   for (let i = 0; i < _problemSet?.length; i++) {
     problemSet[i] = {
