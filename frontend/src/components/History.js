@@ -127,9 +127,9 @@ const History = () => {
             </TableHead>
             <TableBody>
               {questionData.map((problem) => (
-                <StyledTableRow key={problem.id}>
+                <StyledTableRow key={problem.tryId}>
                   <StyledTableCell component="th" scope="row">
-                      <Button>{problem.tryId}</Button>
+                      <Button>{problem.tryId+2}</Button>
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     <Button color={ problem.isCorrect ? 'success' : 'warning'} onClick={handleOpen}>
