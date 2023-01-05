@@ -1,14 +1,30 @@
-import Typography from '@mui/material/Typography';
-import { useSol } from '../containers/hook/useSol';
-import DrawerHeader from './DrawerHeader';
-import Main from './Main';
-import { Box, Avatar } from '@mui/material'
 import React from 'react'
+import Typography from '@mui/material/Typography';
+import { Box, Avatar } from '@mui/material'
 import { EmojiEvents } from '@mui/icons-material'
 import Fade from 'react-reveal/Fade';
+import { useSol } from '../containers/hook/useSol';
+import Main from './Main';
+import DrawerHeader from './DrawerHeader';
+import { useQuery } from '@apollo/client';
+import { GET_ALL_QUESTION_OF_USER_QUERY } from '../graphql/queries';
 
 const Profile = () => {
   const { account } = useSol();
+
+  const address = account
+  const res = useQuery(GET_ALL_QUESTION_OF_USER_QUERY, {
+    variables: {
+      address
+    }
+  });
+  
+  const { data: userData, loading: userLoading} = res;    
+  console.log(userLoading);
+  if (userLoading) return <p>Loading...</p>;
+  const _userData = userData.allQuestionOfUser;
+  console.log(_userData);
+
   return(
     <Main>
     <DrawerHeader />
