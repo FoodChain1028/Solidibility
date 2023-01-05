@@ -1,3 +1,5 @@
+import { QuestionDataModel } from "./src/models/Model"
+
 const data = [
   {
     questionId: 1,
@@ -25,8 +27,17 @@ const data = [
     description: "Hash functions are able to implement asymmetric cryptography. After an element is hashed, its result is hard to recover to the original value.",
     example1: "Input: 100\nOutput: 0x26700e13983fefbd9cf16da2ed70fa5c6798ac55062a4803121a869731e308d2",
     example2: "Input: 360\nOutput: 0x8077777ae4769de06cbfd1c0b8b1f653b51ec156d91a9aca16a4102f19e03d9e",
+    others:"(Please Do Not Modify Input)",
     code: "function solution(uint256 input) public view returns(bytes32){\n    //TO_DO\n}",
     answer: "function solution(uint256 input) public view returns(bytes32){\n    //TO_DO\n    return keccak256(abi.encodePacked(x));\n}"
   }
 ]
+
+const dataInit = async() => {
+  await QuestionDataModel.deleteMany({});
+  await QuestionDataModel.insertMany(data);
+  console.log("Database initialized!");
+};
+
+export { dataInit };
 

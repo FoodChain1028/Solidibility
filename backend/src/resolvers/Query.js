@@ -26,6 +26,7 @@ const Query = {
   
   allQuestionData: async (parent, params, { QuestionDataModel }) => {
     let questionData = await QuestionDataModel.find();
+    console.log("called allQuestionData");
     return questionData
   },
 

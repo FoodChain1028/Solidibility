@@ -26,9 +26,10 @@ function App() {
 
   
   return (
+
     <ThemeProvider theme={theme}>
-      {/* { !signedIn ? <SignIn /> 
-        :      */}
+      { !signedIn ? <SignIn /> 
+        :     
           <Router>
             <Navbar />
             <Routes>
@@ -43,8 +44,10 @@ function App() {
             </Routes>
           </Router>
 
-      {/* } */}
+      }
     </ThemeProvider>   
+      
+  
   );
 }
 

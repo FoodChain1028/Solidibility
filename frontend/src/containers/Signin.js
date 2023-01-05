@@ -54,6 +54,8 @@ const connectWallet = async () => {
     await window.ethereum.send("eth_requestAccounts");
     const accounts = await web3.eth.getAccounts();
     const account = accounts[0];
+
+
     return account;
   } else {
     // Show alert if Ethereum provider is not detected
@@ -77,13 +79,26 @@ const Copyright = (props) => {
 const theme = createTheme();
 
 const SignIn = () => {
-  const { account, setAccount, setSignedIn } = useSol();
+  const { account, setAccount, setSignedIn, createUser, createQuestion } = useSol();
 
   //TODO: handleSignIn 
   const handleConnect = async (event) => {
     event.preventDefault();
     const addr = await connectWallet()
     setAccount(addr);
+    await createUser({
+      variables:{
+        address:addr
+      }
+    });
+    for(let i = 0; i < 3; i++){
+      await createQuestion({
+        variables:{
+          address: addr,
+          questionId: i+1
+        }
+      })
+    }
   };
 
   useEffect(() => {

@@ -21,7 +21,6 @@ mutation CreateQuestion(
     address
     questionId
     isCorrect
-    answerRecord
   }
 }
 `
