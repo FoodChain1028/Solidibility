@@ -3,15 +3,29 @@ import { createServer } from 'node:http';
 import { WebSocketServer } from 'ws'
 import { createSchema, createYoga, createPubSub } from 'graphql-yoga';
 import { useServer } from 'graphql-ws/lib/use/ws'
-
 // resolvers
 import Query from "./resolvers/Query.js";
 import Mutation from "./resolvers/Mutation.js";
 // import Subscription from "./resolvers/Subscription.js";
 // db
 import { UserModel, QuestionModel, QuestionDataModel } from './models/Model.js'
+// for deploy
+import apiRoute from './api';
+import express from 'express';
+import cors from 'cors';
+import path from "path";
 
 const pubSub = createPubSub();
+const __dirname = path.resolve();
+const app = express();
+
+app.use(cors());
+app.use("/api", apiRoute);
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../frontend","build")));
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
+});
 
 const yoga = createYoga({
   schema: createSchema({
