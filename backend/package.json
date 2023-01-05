@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "server": "nodemon src/index.js --ext js --exec babel-node",
-    "deploy": "babel-node index.js"
+    "deploy": "babel-node src/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
