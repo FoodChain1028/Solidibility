@@ -44,7 +44,7 @@ const typoStyle = {
 
 
 const Quiz = () => {
-  const { navOpen, getQuestionOfUser } = useSol();
+  const { navOpen, account } = useSol();
   const navigate = useNavigate();
   const ToProblem = (id) => {
     console.log("to Problem");
@@ -59,7 +59,7 @@ const Quiz = () => {
   const res1 = useQuery(GET_ALL_QUESTION_DATA_QUERY)
   const res2 = useQuery(GET_ALL_QUESTION_OF_USER_QUERY, {
     variables: {
-      address
+      address: account
     }
   });
   

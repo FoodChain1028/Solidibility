@@ -21,6 +21,12 @@ query question(
   question(address:$address, questionId:$questionId){
     address
     questionId
+    isCorrect
+    answerRecord {
+      tryId
+      isCorrect
+      record
+      }
     }
   }
 `;
