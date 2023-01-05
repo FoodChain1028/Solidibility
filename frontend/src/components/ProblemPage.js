@@ -11,7 +11,7 @@ import { border, margin, sizing, width } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useQuery } from '@apollo/client';
-import { GET_ALL_QUESTION_DATA_QUERY } from '../graphql/queries';
+import { GET_ALL_QUESTION_DATA_QUERY, GET_QUESTION_QUERY } from '../graphql/queries';
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -36,13 +36,26 @@ const ProblemPage = () => {
   let drawerWidth = 290;
   let eWidth = 290;
   let width = `75%`;
-  const {loading, data:questionData} = useQuery(GET_ALL_QUESTION_DATA_QUERY)
+  console.log(account);
 
-  if(loading) return <p>Loading...</p>
-  const data = questionData
+  const res1 = useQuery(GET_ALL_QUESTION_DATA_QUERY);
+  console.log(account, id);
+  const res2 = useQuery(GET_QUESTION_QUERY, {
+    variables: {
+      address: account,
+      questionId: Number(id)
+    }
+  })
+
+  const {loading, data: questionData} = res1;
+  if (loading || !questionData) return <p>Loading...</p>
   const thisData = questionData.allQuestionData[id-1];
-  console.log(thisData);
 
+  const {loading: _loading, data: _questionData} = res2;
+  if (_loading || !_questionData) return <p>Loading...</p>
+  console.log(_questionData);
+  const tryId = _questionData.question.answerRecord.length - 1
+  
   if (navOpen) {
     drawerWidth = 440;
     eWidth = 440;
@@ -60,7 +73,7 @@ const ProblemPage = () => {
     setOpen(false);
   };
 
-  // 提交題目
+  // 提交答案
   const handleClick = async  () => {
     console.log(code);
     if (code !== thisData.answer) {
@@ -70,7 +83,7 @@ const ProblemPage = () => {
         variables:{
           address:account,
           questionId:thisData.questionId,
-          tryId:0, //to modified
+          tryId: tryId, //to modified
           isCorrect: false,
           record: code
         }

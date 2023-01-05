@@ -25,12 +25,12 @@ query question(
     address
     questionId
     isCorrect
-    answerRecord{
+    answerRecord {
       tryId
       isCorrect
       record
-    }  
-  }
+      }
+    }
 }
 `;
 
