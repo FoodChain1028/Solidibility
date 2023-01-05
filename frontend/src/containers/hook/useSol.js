@@ -25,16 +25,16 @@ const SolContext = createContext({
   problemSet: [],
   code:"",
   setCode: () => {},
-  getUser: () => {},
-  getQuestion: () => {},
-  getQuestionOfUser: () => {},
-  createUser: () => {},
-  createQuestion: () => {},
-  updateQuestionStatus: () => {},
-  createQuestionData: () => {},
-  updateAnswerRecord: () => {},
-  setUserName: () => {},
-  getAllQuestion: () => {},
+  getUser: async () => {},
+  getQuestion: async () => {},
+  getQuestionOfUser: async () => {},
+  createUser: async () => {},
+  createQuestion: async () => {},
+  updateQuestionStatus: async () => {},
+  createQuestionData: async () => {},
+  updateAnswerRecord: async () => {},
+  setUserName: async () => {},
+  getAllQuestion: async () => {},
 
 });
 
@@ -51,7 +51,7 @@ const SolProvider = (props) => {
   const [getQuestion] = useLazyQuery(GET_QUESTION_QUERY);
   const [getQuestionOfUser] = useLazyQuery(GET_ALL_QUESTION_OF_USER_QUERY);
   const [getAllQuestion] = useLazyQuery(GET_ALL_QUESTION_DATA_QUERY);
-  
+
   const problemSet = [
     {
       id:1,
@@ -69,7 +69,7 @@ const SolProvider = (props) => {
       isCorrect: false
     }
   ]
-  
+
   //Mutations
   const [createUser] = useMutation(CREATE_USER_MUTATION);
   const [createQuestion] = useMutation(CREATE_QUESTION_MUTATION);

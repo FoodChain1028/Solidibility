@@ -1,5 +1,6 @@
 const Mutation = {
   createUser: async (parent, { address }, { UserModel, pubSub }) => {
+    console.log("called createUser");
     const newUser = new UserModel({address});
     await newUser.save();
     pubSub.publish("USER_CREATED", {
@@ -10,6 +11,7 @@ const Mutation = {
 
 
   createQuestion: async (parent, { address, questionId }, { QuestionModel, pubSub }) => {
+    console.log("called createQuestion");
     const newQuestion = new QuestionModel({address, questionId, isCorrect: false});
     await newQuestion.save();
     pubSub.publish("QUESTION_CREATED", {
@@ -69,6 +71,7 @@ const Mutation = {
   },
 
   setUserName: async (parent, {address, name},{UserModel, pubSub}) => {
+    console.log("called setUserName");
     const user = await UserModel.findOneAndUpdate(
       { address },
       {
