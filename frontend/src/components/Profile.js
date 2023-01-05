@@ -59,7 +59,7 @@ const pic = [
 ]
 
 const Profile = () => {
-  const { account, navOpen, setUserName, getUser } = useSol();
+  const { account, navOpen, setUserName } = useSol();
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState("")
   const [num, setNum] = useState(0)

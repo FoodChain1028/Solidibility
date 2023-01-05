@@ -16,6 +16,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DrawerHeader from './DrawerHeader';
 import Main from './Main';
 import CopyButton from './CopyButton';
+import { useQuery } from '@apollo/client';
+import { GET_QUESTION_QUERY } from '../graphql/queries';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -56,16 +58,24 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const History = () => {
 
   const { id } = useParams()
-  const { problemSet, setCode, code, navOpen } = useSol();
+  const { problemSet, setCode, code, navOpen, account } = useSol();
   const [open, setOpen] = useState(false);
-  const [historyId, setHistoryId] = useState(1);
-
   const navigate = useNavigate();
+  const numId = Number(id)
+  
+  const {loading, data: question} = useQuery(GET_QUESTION_QUERY,{
+    variables:{
+      address:account,
+      questionId:numId
+    }
+  })
 
-  const ToProblem = () => {
-    console.log("to Problem");
-    navigate('/quiz/'+ id)
-  }
+  if(loading) return <p>Loading...</p>
+
+  const questionData = question.question.answerRecord
+  console.log(questionData);
+
+  
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -116,10 +126,10 @@ const History = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {problemSet.map((problem) => (
+              {questionData.map((problem) => (
                 <StyledTableRow key={problem.id}>
                   <StyledTableCell component="th" scope="row">
-                      <Button>{problem.id}</Button>
+                      <Button>{problem.tryId}</Button>
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     <Button color={ problem.isCorrect ? 'success' : 'warning'} onClick={handleOpen}>
@@ -136,9 +146,9 @@ const History = () => {
                         <Typography id="modal-modal-title" variant="h6" component="h2">
                           Your Answer:
                         </Typography>
-                        <CopyButton code={"123"}/>
+                        <CopyButton code={problem.record}/>
                         <Typography sx={{ mt: 2 }}>
-                          {"Your Answer"}
+                          {problem.record}
                         </Typography>
                       </Box>
                     </Modal>
