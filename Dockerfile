@@ -2,8 +2,8 @@ FROM node:16-alpine
 
 EXPOSE 4000
 
-COPY . /usr/src/app
-WORKDIR /usr/src/app
+COPY . /app
+WORKDIR /app
 
 RUN corepack enable
 RUN yarn install:prod
