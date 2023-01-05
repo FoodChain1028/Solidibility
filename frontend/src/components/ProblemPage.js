@@ -1,21 +1,47 @@
+import { forwardRef, useEffect, useState } from 'react';
 import DrawerHeader from './DrawerHeader';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useSol } from '../containers/hook/useSol'
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Editor from "@monaco-editor/react";
 import Button from '@mui/material/Button';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { border, margin, sizing, width } from '@mui/system';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { useQuery } from '@apollo/client';
+import { GET_ALL_QUESTION_DATA_QUERY } from '../graphql/queries';
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+const typoStyle = {
+  marginLeft: '20px',
+  marginTop: '10px'
+};
 
 const ProblemPage = () => {
 
-  const { id } = useParams()
-  const { problemSet, setCode, code, navOpen } = useSol();
+  const [open, setOpen] = useState(false);
+  const [correct, setCorrect] = useState(false);
+  const { getAllQuestion } = useSol();
 
+  const { id } = useParams();
+  const { account, problemSet, setCode, code, navOpen, updateAnswerRecord, updateQuestionStatus } = useSol();
+  const navigate = useNavigate();
+  const answer = "124";
   // deal with css
   let drawerWidth = 290;
   let eWidth = 290;
   let width = `75%`;
+  const {loading, data:questionData} = useQuery(GET_ALL_QUESTION_DATA_QUERY)
+
+  if(loading) return <p>Loading...</p>
+  const data = questionData
+  const thisData = questionData.allQuestionData[id-1];
+  console.log(thisData);
 
   if (navOpen) {
     drawerWidth = 440;
@@ -26,11 +52,54 @@ const ProblemPage = () => {
   const handleOnChange = (e) => {
     setCode(e)
   }
-  const handleSubmit = () => {
-    console.log(code);
-  }
 
-  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  // 提交題目
+  const handleClick = async  () => {
+    console.log(code);
+    if (code !== thisData.answer) {
+      setCorrect(false);
+      // TO_DO 更新題目回答
+      await updateAnswerRecord({
+        variables:{
+          address:account,
+          questionId:thisData.questionId,
+          tryId:0, //to modified
+          isCorrect: false,
+          record: code
+        }
+      })
+    }
+    else {
+      setCorrect(true);
+      // TO_DO 更新題目回答
+      await updateAnswerRecord({
+        variables:{
+          address:account,
+          questionId:thisData.questionId,
+          tryId:0, //to modified
+          isCorrect: true,
+          record: code
+        }
+      })
+      updateQuestionStatus({
+        variables:{
+          address:account,
+          questionId:thisData.questionId
+        }
+      })
+    }
+    setOpen(true);
+  };
+
+
+
   return(
     <>
     <div style={{
@@ -41,10 +110,21 @@ const ProblemPage = () => {
       alignItems: 'center'
     }}>
       <DrawerHeader/>
-      <Typography variant='h4'> {`Problem ${id}`} </Typography>
-      <br/>
-      <Typography paragraph>
-        {problemSet[id-1].description}
+      <Button onClick={() => {navigate('/quiz')}}>
+          <ArrowBackIosIcon />
+      </Button>
+      <Typography variant='h4' style={typoStyle}> {`Problem ${id}: ${thisData.name}`} </Typography>
+      <Typography paragraph style={typoStyle}>
+        {thisData.description}
+      </Typography>
+      <Typography paragraph style={typoStyle}>
+        {`Example1:${thisData.example1}`}
+      </Typography>
+      <Typography paragraph style={typoStyle}>
+        {`Example2:${thisData.example2}`}
+      </Typography>
+      <Typography paragraph style={typoStyle}>
+        {`${thisData.others}`}
       </Typography>
     </div>
 
@@ -59,15 +139,26 @@ const ProblemPage = () => {
         language={"javascript"}
         value={code}
         theme="vs-dark"
-        defaultValue="123"
+        defaultValue={thisData.code}
         onChange={(e) => {
           handleOnChange(e)
         }}
       />
       <br />
-      <Button variant="outlined" color="error" onClick={() => handleSubmit()}>
+      <Button variant="outlined" color="error" onClick={() => handleClick()} style={typoStyle}>
         SUBMIT
       </Button>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        {
+          correct ? 
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            You Are Correct!
+          </Alert> :
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            You Are Wrong!
+          </Alert>
+        }
+      </Snackbar>
     </div>
     </>
 

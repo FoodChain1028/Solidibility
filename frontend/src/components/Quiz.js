@@ -37,6 +37,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+
+const typoStyle = {
+  marginLeft: '20px'
+};
+
+
 const Quiz = () => {
   const { navOpen, getQuestionOfUser } = useSol();
   const navigate = useNavigate();
@@ -82,6 +88,7 @@ const Quiz = () => {
   
   return(
     <>
+
       { (loading && userLoading) ? <p>Loading...</p> :
         <Main open={navOpen} style={{
           marginLeft: width

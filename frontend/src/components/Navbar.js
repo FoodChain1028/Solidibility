@@ -1,5 +1,6 @@
 import DrawerHeader from './DrawerHeader';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -33,6 +34,13 @@ const navbarTheme = createTheme({
       contrastText: '#fff',
     },
   },
+  typography: {
+    fontFamily: [
+      'Chilanka',
+      'cursive',
+    ].join(','),
+    fontSize: [25]
+  }
 });
 const drawerWidth = 350;
 export default function Navbar() {
@@ -51,7 +59,6 @@ export default function Navbar() {
       case 3: {navigate("/about-us"); break}
     }
   }
-
 
   const handleIcon = (i) => {
     switch(i){
@@ -84,7 +91,6 @@ export default function Navbar() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        
         <List>
           {
             ["Home", "Profile", "Quiz", "About us"].map((text, i) => {
@@ -95,7 +101,8 @@ export default function Navbar() {
                     <ListItemIcon>
                       {icon}
                     </ListItemIcon>
-                    <ListItemText primary={text} />
+                    <Typography paragraph>{text}</Typography>
+                    {/* <ListItemText primary={text} /> */}
                   </ListItemButton >
               </ListItem>
             )

@@ -10,14 +10,26 @@ import About from './components/About';
 import Profile from './components/Profile';
 import ProblemPage from './components/ProblemPage';
 import History from './components/History';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Chilanka',
+      'cursive',
+    ].join(','),
+    fontSize: [25]
+  },});
 
 function App() {
   const { signedIn } = useSol();
+
   
   return (
-    <>
-      {/* { !signedIn ? <SignIn /> 
-        :      */}
+
+    <ThemeProvider theme={theme}>
+      { !signedIn ? <SignIn /> 
+        :     
           <Router>
             <Navbar />
             <Routes>
@@ -32,8 +44,10 @@ function App() {
             </Routes>
           </Router>
 
-      {/* } */}
-    </>   
+      }
+    </ThemeProvider>   
+      
+  
   );
 }
 
