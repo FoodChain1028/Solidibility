@@ -15,10 +15,10 @@ import { createTheme, ThemeProvider } from '@mui/material';
 const theme = createTheme({
   typography: {
     fontFamily: [
-      'Chilanka',
+      'Times New Roman',
       'cursive',
     ].join(','),
-    fontSize: [25]
+    fontSize: 20
   },});
 
 function App() {
