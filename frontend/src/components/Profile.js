@@ -74,9 +74,6 @@ const Profile = () => {
   if(loading) return <p>Loading...</p>
   const _name = userData.user.name;
   
-
-
-
   if (navOpen) {
     width = 1000;
     marginLeft = 150;

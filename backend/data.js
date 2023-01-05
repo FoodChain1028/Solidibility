@@ -9,7 +9,7 @@ const data = [
     example2: "Input: [0, 0, 0, 0, 1]\nOutput: 1",
     others: "The array length is 5.\n(Please Do Not Modify Input)",
     code: "function solution(uint256[5] memory input) public returns(uint256 result){\n    //TO_DO\n}",
-    answer: "function solution(uint256[5] memory input) public returns(uint256 result){\n    //TO_DO\n    for (uint i = 0; i < input.length; i++){\n        result += input[i];\n    }\n}",
+    answer: "function solution(uint256[5] memory input) public returns(uint256 result){\n    //TO_DO\n    for (uint i = 0; i < input.length; i++){\n        result += input[i];\n    }\n    return result;\n}",
   },
   {
     questionId: 2,
