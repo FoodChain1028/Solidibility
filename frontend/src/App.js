@@ -16,8 +16,8 @@ function App() {
   
   return (
     <>
-      {/* { !signedIn ? <SignIn /> 
-        :      */}
+      { !signedIn ? <SignIn /> 
+        :     
           <Router>
             <Navbar />
             <Routes>
@@ -32,7 +32,7 @@ function App() {
             </Routes>
           </Router>
 
-      {/* } */}
+      }
     </>   
   );
 }

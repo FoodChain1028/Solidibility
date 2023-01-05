@@ -1,5 +1,5 @@
 import { useState, createContext, useContext } from 'react';
-import { useLazyQuery, useMutation } from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import { 
   GET_USER_QUERY, 
   GET_QUESTION_QUERY,
@@ -25,16 +25,16 @@ const SolContext = createContext({
   problemSet: [],
   code:"",
   setCode: () => {},
-  getUser: () => {},
-  getQuestion: () => {},
-  getQuestionOfUser: () => {},
-  createUser: () => {},
-  createQuestion: () => {},
-  updateQuestionStatus: () => {},
-  createQuestionData: () => {},
-  updateAnswerRecord: () => {},
-  setUserName: () => {},
-  getAllQuestionData: () => {},
+  getUser: async () => {},
+  getQuestion: async () => {},
+  getQuestionOfUser: async () => {},
+  createUser: async () => {},
+  createQuestion: async () => {},
+  updateQuestionStatus: async () => {},
+  createQuestionData: async () => {},
+  updateAnswerRecord: async () => {},
+  setUserName: async () => {},
+  getAllQuestion: async () => {},
 
 });
 
@@ -50,15 +50,7 @@ const SolProvider = (props) => {
   const [getUser] = useLazyQuery(GET_USER_QUERY);
   const [getQuestion] = useLazyQuery(GET_QUESTION_QUERY);
   const [getQuestionOfUser] = useLazyQuery(GET_ALL_QUESTION_OF_USER_QUERY);
-  const [getAllQuestionData] = useLazyQuery(GET_ALL_QUESTION_DATA_QUERY);
-  
-  //Mutations
-  const [createUser] = useMutation(CREATE_USER_MUTATION);
-  const [createQuestion] = useMutation(CREATE_QUESTION_MUTATION);
-  const [updateQuestionStatus] = useMutation(UPDATE_QUESTION_STATUS_MUTATION);
-  const [createQuestionData] = useMutation(CREATE_QUESTION_DATA_MUTATION);
-  const [updateAnswerRecord] = useMutation(UPDATE_ANSWER_RECORD);
-  const [setUserName] = useMutation(SET_USER_NAME_MUTATION);
+  const [getAllQuestion] = useLazyQuery(GET_ALL_QUESTION_DATA_QUERY);
 
   const problemSet = [
     {
@@ -77,6 +69,14 @@ const SolProvider = (props) => {
       isCorrect: false
     }
   ]
+
+  //Mutations
+  const [createUser] = useMutation(CREATE_USER_MUTATION);
+  const [createQuestion] = useMutation(CREATE_QUESTION_MUTATION);
+  const [updateQuestionStatus] = useMutation(UPDATE_QUESTION_STATUS_MUTATION);
+  const [createQuestionData] = useMutation(CREATE_QUESTION_DATA_MUTATION);
+  const [updateAnswerRecord] = useMutation(UPDATE_ANSWER_RECORD);
+  const [setUserName] = useMutation(SET_USER_NAME_MUTATION);
 
 
   return (
@@ -101,7 +101,7 @@ const SolProvider = (props) => {
         createQuestionData,
         updateAnswerRecord,
         setUserName,
-        getAllQuestionData,
+        getAllQuestion,
 
 			}
 		}

@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const GET_USER_QUERY = gql
+const GET_USER_QUERY = gql
 `
 query user(
   $address: String!
@@ -12,7 +12,7 @@ query user(
   }
 `;
 
-export const GET_QUESTION_QUERY = gql
+const GET_QUESTION_QUERY = gql
 `
 query question(
   $address: String!
@@ -25,7 +25,7 @@ query question(
   }
 `;
 
-export const GET_ALL_QUESTION_OF_USER_QUERY = gql
+const GET_ALL_QUESTION_OF_USER_QUERY = gql
 `
 query allQuestionOfUser(
   $address: String!
@@ -39,10 +39,10 @@ query allQuestionOfUser(
   }
 `;
 
-export const GET_ALL_QUESTION_DATA_QUERY = gql
+const GET_ALL_QUESTION_DATA_QUERY = gql
 `
 query getAllQuestionData{
-  getAllQuestionData{
+  allQuestionData{
     questionId
     name
     description
@@ -55,3 +55,4 @@ query getAllQuestionData{
   }
 `;
 
+export {GET_USER_QUERY, GET_QUESTION_QUERY, GET_ALL_QUESTION_OF_USER_QUERY, GET_ALL_QUESTION_DATA_QUERY}
