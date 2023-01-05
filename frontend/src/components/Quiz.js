@@ -14,6 +14,8 @@ import { useSol } from '../containers/hook/useSol';
 import { useNavigate } from 'react-router-dom';
 import DrawerHeader from './DrawerHeader';
 import Main from './Main';
+import { GET_ALL_QUESTION_DATA_QUERY } from '../graphql/queries';
+import { useQuery } from '@apollo/client';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,14 +37,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const createData = (name, calories, fat, carbs, protein) => {
-  return { name, calories, fat, carbs, protein };
-}
 
 
 
 const Quiz = () => {
-  const { navOpen, problemSet } = useSol();
+  const { navOpen } = useSol();
   const navigate = useNavigate();
   const ToProblem = (id) => {
     console.log("to Problem");
@@ -52,6 +51,11 @@ const Quiz = () => {
   const ToHistory = (id) => {
     navigate('/quiz/' + id + "/history")
   }
+
+  const { loading, data:data } = useQuery(GET_ALL_QUESTION_DATA_QUERY)
+  
+  if(loading) return <p>loading...</p>
+  const { problemSet } = data;
 
   let width = 300;
   if (navOpen) width = 450;
