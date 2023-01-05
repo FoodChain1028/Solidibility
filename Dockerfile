@@ -6,6 +6,7 @@ COPY . /app
 WORKDIR /app
 
 RUN corepack enable
+RUN yarn
 RUN yarn install:prod
 RUN yarn build
 
