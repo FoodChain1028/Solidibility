@@ -35,11 +35,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const createData = (name, calories, fat, carbs, protein) => {
-  return { name, calories, fat, carbs, protein };
-}
-
-
+const typoStyle = {
+  marginLeft: '20px'
+};
 
 const Quiz = () => {
   const { navOpen, problemSet } = useSol();
@@ -61,13 +59,13 @@ const Quiz = () => {
         marginLeft: width
       }}>
         <DrawerHeader/>
-        <Typography variant='h4'> Quiz List</Typography>
+        <Typography variant='h4' style={typoStyle}> Quiz List</Typography>
         <p></p>
-        <Typography variant='paragraph'> You can browse and choose the quiz you want to challenge here.</Typography>
+        <Typography variant='paragraph' style={typoStyle}> You can browse and choose the quiz you want to challenge here.</Typography>
         <p></p>
-        <Typography variant='paragraph'> ✔️  Press the quiz id (left) to enter quizing page. </Typography>
+        <Typography variant='paragraph' style={typoStyle}> ✔️  Press the quiz id (left) to enter quizing page. </Typography>
         <br />
-        <Typography variant='paragraph'> ✔️  Press the status (right) to enter quizing page. </Typography>
+        <Typography variant='paragraph' style={typoStyle}> ✔️  Press the status (right) to enter quizing page. </Typography>
       <Box sx={{
         height: '100vh',
         width: { xs: "100%", sm: '100%' },

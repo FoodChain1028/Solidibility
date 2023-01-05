@@ -8,12 +8,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp';
 import CancelSharpIcon from '@mui/icons-material/CancelSharp';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Tooltip from '@mui/material/Tooltip';
 import React, { useState } from 'react'
 import { useSol } from '../containers/hook/useSol';
 import { useNavigate, useParams } from 'react-router-dom';
 import DrawerHeader from './DrawerHeader';
 import Main from './Main';
+import CopyButton from './CopyButton';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -40,30 +42,32 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 1200,
+    width: 800,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
   };
 
+  const typoStyle = {
+    marginLeft: '20px'
+  };
+
 const History = () => {
 
   const { id } = useParams()
   const { problemSet, setCode, code, navOpen } = useSol();
-  const [open, setOpen] = useState("false");
+  const [open, setOpen] = useState(false);
   const [historyId, setHistoryId] = useState(1);
 
   const navigate = useNavigate();
+
   const ToProblem = () => {
     console.log("to Problem");
     navigate('/quiz/'+ id)
   }
 
-  const handleOpen = (id) => {
-    setOpen(true);
-    // setHistoryId(id)
-    };
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   let width = 300;
@@ -74,9 +78,15 @@ const History = () => {
         marginLeft: width
       }}>
         <DrawerHeader/>
-        <Typography variant='h4'> { "Quiz " + id + " History" } </Typography>
+        <Button onClick={() => {navigate('/quiz')}}>
+          <ArrowBackIosIcon />
+        </Button>
+        
         <p></p>
-        <Typography variant='paragraph'> ✔️  You can checkout your answer history here! </Typography>
+        <Typography variant='h4' style={typoStyle}> { "Quiz " + id + " History" } </Typography>
+        <p></p>
+        <Typography variant='paragraph' style={typoStyle}> ✔️  You can checkout your answer history here! </Typography>
+        <p></p>
       <Box sx={{
         height: '100vh',
         width: { xs: "100%", sm: '100%' },
@@ -112,9 +122,26 @@ const History = () => {
                       <Button>{problem.id}</Button>
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    <Button color={ problem.isCorrect ? 'success' : 'warning'} onClick={() => handleOpen()}>
+                    <Button color={ problem.isCorrect ? 'success' : 'warning'} onClick={handleOpen}>
                       Press To Check Your History Answer 
                     </Button>
+                    <Modal
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      <Box sx={style}>
+                        
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                          Your Answer:
+                        </Typography>
+                        <CopyButton code={"123"}/>
+                        <Typography sx={{ mt: 2 }}>
+                          {"Your Answer"}
+                        </Typography>
+                      </Box>
+                    </Modal>
                   </StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
@@ -132,21 +159,6 @@ const History = () => {
         </TableContainer>
         </Box>
       </Main>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
     </>
   )
 }
