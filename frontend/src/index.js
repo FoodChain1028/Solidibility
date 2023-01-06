@@ -14,11 +14,11 @@ import { createClient } from 'graphql-ws';
 
 
 const httpLink = new HttpLink({
-  uri: process.env.PORT + '/graphql',
+  uri: 'https://solidibilitybackend.zeabur.app//graphql',
 });
 
 const wsLink = new GraphQLWsLink(createClient({
-  url: process.env.PORT + '/graphql',
+  url: 'https://solidibilitybackend.zeabur.app/graphql',
 }));
 
 const splitLink = split(
