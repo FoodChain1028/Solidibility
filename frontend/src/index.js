@@ -14,11 +14,11 @@ import { createClient } from 'graphql-ws';
 
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: process.env.PORT + '/graphql',
 });
 
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'ws://localhost:4000/graphql',
+  url: process.env.PORT + '/graphql',
 }));
 
 const splitLink = split(
